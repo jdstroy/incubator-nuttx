@@ -447,16 +447,12 @@ directory in your Ubuntu directory like:
 In Ubuntu Userspace for Windows, the Ubuntu file system root directory is
 at:
 
-    %localappdata%\lxss\rootfs
+    \\wsl$\Ubuntu
 
-Or
+The home directory can be found at:
 
-    C:\Users\Username\AppData\Local\lxss\rootfs
-
-However, I am unable to see my files under the rootfs\home directory.
-After some looking around, I find the home directory
-`%localappdata%\lxss\home`.
-
+    \\wsl$\Ubuntu\home
+    
 With that trick access to the `/home` directory, you should actually be
 able to use Windows tools outside of the Ubuntu sandbox with versions of
 NuttX built within the sandbox using that path.
@@ -510,9 +506,10 @@ native toolchains, see the section *Cygwin Build Problems* below.
 However, there is currently no build support for using Windows native
 tools with Ubuntu under Windows.  This tool combination is made to work
 with Cygwin through the use of the `cygpath -w` tool that converts paths
-from say `/cydrive/c/Program Files` to `C:\Program Files`.  There is,
-however, no corresponding tool to convert `/mnt/c/Program Files` in the
-Ubuntu environment.
+from say `/cydrive/c/Program Files` to `C:\Program Files`.  The `wslpath`
+utility can convert `/mnt/c/Program Files` in the Ubuntu environment, and
+`wslpath.exe` can convert `C:\Program Files` to the corresponding path in
+WSL, although neither has been integrated (yet) into NuttX.
 
 ### Graphics Support
 
